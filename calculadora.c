@@ -22,7 +22,23 @@ int subtracao(int num1, int num2)
 {
     return num1 - num2;
 }
+int multiplicacao(int num1, int num2)
+{
+    int res = 0;
+    for(int i = 0; i < num1; i = soma(i, 1))
+        res = soma(res, num2);
 
+    return res;
+}
+
+int fatorial(int num1)
+{
+    int res = 1;
+    for (int i = 1; i <= num1; i = soma(i, 1))
+        res = multiplicacao(res, i);
+    
+    return res;
+}
 
 int main(void)
 {
@@ -31,7 +47,7 @@ int main(void)
 
     while(1)
     {
-        printf("Digite a operacao desejada (+, -, 0):");
+        printf("Digite a operacao desejada (+, -, !, 0):");
         scanf("%c%*c", &op);
         num_op = 2;
 
@@ -47,6 +63,12 @@ int main(void)
             res = subtracao(num1, num2);
             break;
 
+        case '!':
+            num_op = 1;
+            coleta_operandos(num_op, &num1, NULL);
+            res = fatorial(num1);
+            break;
+
         case '0':
             return 0;
         
@@ -54,8 +76,10 @@ int main(void)
             printf("Operacao nao suportada. Digita novamente");
         }
 
-        if (num_op == 2)
+         if (num_op == 2)
             printf("%d %c %d = %d\n", num1, op, num2, res);
+        else if (num_op == 1)
+            printf("%c %d = %d\n", num1, op, res);
       
     }
 
